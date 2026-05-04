@@ -3,12 +3,24 @@
 namespace App\Repositories;
 
 use App\Models\GeoPoint;
+use Illuminate\Database\Eloquent\Collection;
 
 readonly class GeoPointRepository
 {
-    public function getTrackPoints(string $trackId)
+    public function getRawPoints(): Collection
     {
-        return GeoPoint::where('track_id', $trackId)
+        return GeoPoint::query()
+            ->orWhereNull('track_id')
+            ->orWhereNull('zone_id')
+            ->orWhereNull('distance')
+            ->distinct()
+            ->get();
+    }
+
+    public function getTrackPoints(string $trackId): Collection
+    {
+        return GeoPoint::query()
+            ->where('track_id', $trackId)
             ->orderBy('id')
             ->get();
     }
