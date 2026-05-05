@@ -8,7 +8,7 @@ docker compose exec -T mysql mysql -u root -proot --default-character-set=utf8mb
 #### Запуск команды чтения и обработки данных
 
 ```
-docker compose exec geo-php-fpm php artisan geo-handle
+docker compose exec geo-php-fpm php artisan geo:handle
 ```
 
 #### Запуск команды чтения и обработки данных из бд по расписанию cron
