@@ -4,7 +4,7 @@ namespace App\Services;
 
 readonly class HaversineService
 {
-    private const float EARTH_RADIUS = 6371000.0;
+    private const float EARTH_RADIUS = 6371000;
 
     /**
      * Returns distance between two points in meters

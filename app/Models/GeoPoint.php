@@ -10,6 +10,7 @@ class GeoPoint extends Model
     protected $table        = 'geo_point';
     protected $keyType      = 'string';
     public    $incrementing = false;
+    public    $timestamps   = false;
     protected $fillable     = [
         'id',
         'device_id',
@@ -51,25 +52,8 @@ class GeoPoint extends Model
         return $this->belongsTo(GeoZone::class, 'zone_id', 'id');
     }
 
-    public function trackStartPoint(): BelongsTo
-    {
-        return $this->belongsTo(GeoPoint::class, 'track_id', 'id');
-    }
-
-    public function scopeByDeviceAndDate($query, int $deviceId, string $date)
-    {
-        return $query->where('device_id', $deviceId)
-            ->whereDate('dt_gps', $date)
-            ->orderBy('id');
-    }
-
     public function isInvalid(): bool
     {
         return $this->lat == 0 && $this->lon == 0;
-    }
-
-    public function toLatLngArray(): array
-    {
-        return [(float)$this->lat, (float)$this->lon];
     }
 }

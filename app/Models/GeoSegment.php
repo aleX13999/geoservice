@@ -10,6 +10,7 @@ class GeoSegment extends Model
     protected $table        = 'geo_segment';
     protected $keyType      = 'string';
     public    $incrementing = false;
+    public    $timestamps   = false;
     protected $fillable     = [
         'id',
         'track_id',

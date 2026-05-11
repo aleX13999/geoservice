@@ -21,11 +21,16 @@ readonly class PointService
             $xi = $poly[$i]['lon'];
             $yi = $poly[$i]['lat'];
 
-            $xj = $poly[$j]['lat'];
+            $xj = $poly[$j]['lon'];
             $yj = $poly[$j]['lat'];
 
+            if ($yi === $yj) {
+                $j = $i;
+                continue;
+            }
+
             $intersect = (($yi > $lat) != ($yj > $lat))
-                && ($lon < ($xj - $xi) * ($lat - $yi) / ($yj - $yi + 0.0000001) + $xi);
+                && ($lon < ($xj - $xi) * ($lat - $yi) / ($yj - $yi) + $xi);
 
             if ($intersect) {
                 $inside = !$inside;
@@ -37,7 +42,7 @@ readonly class PointService
         return $inside;
     }
 
-    public function isInCircle(float $pointLat, float $pointLon,   float $centerLat, float $centerLon, float $radius): bool
+    public function isInCircle(float $pointLat, float $pointLon, float $centerLat, float $centerLon, float $radius): bool
     {
         return $this->haversine->calc($pointLat, $pointLon, $centerLat, $centerLon) <= $radius;
     }

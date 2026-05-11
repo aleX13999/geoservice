@@ -58,10 +58,10 @@ return new class extends Migration
             $table->string('track_id', 16)->index();
             $table->string('prev_id', 16)->nullable();
             $table->string('next_id', 16)->nullable();
-            $table->foreignId('device_id')->constrained('geo_device')->onDelete('cascade');
-            $table->foreignId('geo_zone_id')->constrained('geo_zone')->onDelete('cascade');
-            $table->date('dt_begin');
-            $table->date('dt_end');
+            $table->unsignedInteger('device_id')->index();
+            $table->integer('geo_zone_id')->default(0)->index();
+            $table->timestamp('dt_begin');
+            $table->timestamp('dt_end');
             $table->decimal('distance', 10);
         });
     }

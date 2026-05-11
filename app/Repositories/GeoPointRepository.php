@@ -3,25 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\GeoPoint;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\LazyCollection;
 
 readonly class GeoPointRepository
 {
-    public function getRawPoints(): Collection
+    public function getRawPoints(): LazyCollection
     {
         return GeoPoint::query()
             ->orWhereNull('track_id')
             ->orWhereNull('zone_id')
             ->orWhereNull('distance')
-            ->distinct()
-            ->get();
-    }
-
-    public function getTrackPoints(string $trackId): Collection
-    {
-        return GeoPoint::query()
-            ->where('track_id', $trackId)
+            ->orderBy('device_id')
             ->orderBy('id')
-            ->get();
+            ->distinct()
+            ->cursor();
     }
 }
