@@ -80,9 +80,9 @@ docker exec -it geo-php-fpm php artisan db:seed
 
 #### Импорт тестовых данных в бд
 ```
-docker compose exec -T mysql mysql -u {DB_USER} -p{DB_PASSWORD} --default-character-set=utf8mb4 {DB_DATABASE} < geo_point.sql
-docker compose exec -T mysql mysql -u {DB_USER} -p{DB_PASSWORD} --default-character-set=utf8mb4 {DB_DATABASE} < geo_zone.sql
-docker compose exec -T mysql mysql -u {DB_USER} -p{DB_PASSWORD} --default-character-set=utf8mb4 {DB_DATABASE} < geo_zone_point.sql
+docker compose exec -T mysql mysql -u {DB_USER} -p{DB_PASSWORD} --default-character-set=utf8mb4 {DB_DATABASE} < /path/to/geo_point.sql
+docker compose exec -T mysql mysql -u {DB_USER} -p{DB_PASSWORD} --default-character-set=utf8mb4 {DB_DATABASE} < /path/to/geo_zone.sql
+docker compose exec -T mysql mysql -u {DB_USER} -p{DB_PASSWORD} --default-character-set=utf8mb4 {DB_DATABASE} < /path/to/geo_zone_point.sql
 ```
 Где:
 *DB_USER*, *DB_PASSWORD* - имя пользователя и пароль базы данных, *DB_DATABASE* - имя базы данных
