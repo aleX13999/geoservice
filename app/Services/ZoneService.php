@@ -11,10 +11,7 @@ class ZoneService
     public function __construct(
         readonly private GeoZoneRepository $zoneRepository,
         readonly private PointService      $pointService,
-    )
-    {
-        $this->loadZones();
-    }
+    ) {}
 
     public function clearCache(): void
     {
@@ -23,6 +20,10 @@ class ZoneService
 
     public function findZone($lat, $lon): int
     {
+        if (empty($this->zones)) {
+            $this->loadZones();
+        }
+
         $matchedCircles = [];
         $matchedPolys   = [];
 

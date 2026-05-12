@@ -61,10 +61,21 @@ docker compose up -d
 ```shell
 php artisan key:generate
 ```
-6. Выполните миграции:
+
+6. Установите зависимости composer:
+
+```shell
+docker exec -it geo-php-fpm composer install
+```
+
+7. Выполните миграции:
 
 ```shell
 docker compose exec geo-php-fpm php artisan migrate
+```
+8. Добавьте в БД тестовое устройство:
+```shell
+docker exec -it geo-php-fpm php artisan db:seed
 ```
 
 #### Импорт тестовых данных в бд
